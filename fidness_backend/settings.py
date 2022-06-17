@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -27,7 +28,10 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
+CORS_ORIGIN_ALLOW_ALL = False
+CORS_ORIGIN_WHITELIST = (
+    'http://localhost:8081',
+)
 # Application definition
 
 INSTALLED_APPS = [
@@ -44,6 +48,9 @@ INSTALLED_APPS = [
     'authentification',
     'rest_framework_simplejwt.token_blacklist',
     "corsheaders",
+    "partenaire",
+    "client",
+    "superadmin"
 ]
 
 MIDDLEWARE = [
@@ -78,6 +85,9 @@ TEMPLATES = [
     },
 ]
 
+CORS_ORIGIN_WHITELIST = [
+    'http://localhost:3000',
+]
 WSGI_APPLICATION = 'fidness_backend.wsgi.application'
 
 
@@ -85,21 +95,21 @@ WSGI_APPLICATION = 'fidness_backend.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
-    'default':{},
-    'fidness_1': {
+    'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'fid_database',
-        'HOST': 'localhost',
+        'NAME': 'fid_db',
         'USER': 'root',
-        'PASSWORD': '1234'
+        'PASSWORD': '',
+        'HOST': 'localhost',
+        'PORT': '3308',
     },
-    'fidness_2': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'fid_database2',
-        'HOST': 'localhost',
-        'USER': 'root',
-        'PASSWORD': '1234'
-    }
+    #'fidness_2': {
+     #   'ENGINE': 'django.db.backends.mysql',
+      #  'NAME': 'fid_database2',
+       # 'HOST': 'localhost',
+        #'USER': 'root',
+        #'PASSWORD': '1234'
+    #}
 }
 
 REST_FRAMEWORK = {
