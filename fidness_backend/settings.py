@@ -56,6 +56,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
+    
 
 
 ]
@@ -85,21 +86,25 @@ WSGI_APPLICATION = 'fidness_backend.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
-    'default':{},
-    'fidness_1': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'fid_database',
-        'HOST': 'localhost',
-        'USER': 'root',
-        'PASSWORD': '1234'
-    },
-    'fidness_2': {
-        'ENGINE': 'django.db.backends.mysql',
+    'default':{   'ENGINE': 'django.db.backends.mysql',
         'NAME': 'fid_database2',
         'HOST': 'localhost',
         'USER': 'root',
-        'PASSWORD': '1234'
-    }
+        'PASSWORD': '1234'}
+    # 'fidness_1': {
+    #     'ENGINE': 'django.db.backends.mysql',
+    #     'NAME': 'fid_database',
+    #     'HOST': 'localhost',
+    #     'USER': 'root',
+    #     'PASSWORD': '1234'
+    # },
+#     'fidness_2': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'fid_database2',
+#         'HOST': 'localhost',
+#         'USER': 'root',
+#         'PASSWORD': '1234'
+#     }
 }
 
 REST_FRAMEWORK = {
@@ -107,6 +112,8 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         
         'rest_framework_simplejwt.authentication.JWTAuthentication',
+       
+
     )
     
 }
@@ -169,6 +176,7 @@ SIMPLE_JWT = {
 }
 
 
+
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
@@ -196,3 +204,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
+

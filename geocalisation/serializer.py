@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import FidPdv,FidKeyWordsMarque,FidPlaces
+from .models import FidPdv,FidGeolocalisation
 
 
 
@@ -11,26 +11,19 @@ class FidPdvSerializer(serializers.ModelSerializer):
         fields = ['id_marque','adresse','latitude','longitude']
 
 
-class FidKeyWordsMarqueSerializer(serializers.ModelSerializer):
+class FidGeolocalisationSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = FidKeyWordsMarque
-        fields = ['key_word','fid_marque']
-
-class FidPlaces(serializers.ModelSerializer):
-
-    class Meta:
-        model = FidPlaces
-        fields = ['visited_places','latitude','longitude','fid_marque']
+        model =FidGeolocalisation
+        fields ='__all__'
 
 
 
 
-class distanceSerializer(serializers.Serializer):
-    destinationA_lat = serializers.FloatField()
-    destinationA_lon = serializers.FloatField()
-    destinationB_lat = serializers.FloatField()
-    destinationB_lon = serializers.FloatField()
+class geolocationInformationSerializer(serializers.Serializer):
+    latitude = serializers.FloatField()
+    longitude = serializers.FloatField()
+
 
     
 
