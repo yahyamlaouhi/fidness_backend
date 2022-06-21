@@ -1,5 +1,5 @@
 from rest_framework.serializers import ModelSerializer
-from .models import Note
+from .models import AuthUser, Note
 from rest_framework import serializers
 from django.contrib.auth.models import User
 from rest_framework.validators import UniqueValidator
@@ -50,3 +50,9 @@ class RegisterSerializer(serializers.ModelSerializer):
         user.save()
 
         return user
+
+class UserSerializer(serializers.ModelSerializer):
+ 
+    class Meta:
+        model = AuthUser
+        fields = '__all__'

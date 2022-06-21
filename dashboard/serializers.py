@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import FidClient,FidCarteFidelite,FidAdmin
+from .models import FidClient,FidCarteFidelite,FidAdmin, FidGouvernorat
 
 class FidClientSerialiser(serializers.ModelSerializer):
     class Meta:
@@ -38,3 +38,12 @@ class ClientSerializer(serializers.ModelSerializer):
     "new_age":29,
     "new_age_score":23,
    "new_tempon_score":50}
+
+
+class PaysSerializer(serializers.ModelSerializer):
+ 
+    class Meta:
+        model = FidGouvernorat
+        fields = '__all__'
+
+

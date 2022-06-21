@@ -2,12 +2,12 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .serializers import FidClientSerialiser,PartnerSerializer,SuperAdminSerializer,ClientSerializer
+from .serializers import FidClientSerialiser,PartnerSerializer, PaysSerializer,SuperAdminSerializer,ClientSerializer
 import pickle
 import pandas as pd
 from django.shortcuts import get_object_or_404
 from rest_framework.generics import ListCreateAPIView,RetrieveUpdateDestroyAPIView
-from .models import FidCarteFidelite,FidAdmin,FidClient
+from .models import FidCarteFidelite,FidAdmin,FidClient, FidGouvernorat
 from rest_framework import viewsets
 
 
@@ -27,7 +27,7 @@ def churn_prediction(request):
         serializer = FidCarteFideliteSerialiser(data=request.data)
         if serializer.is_valid(raise_exception=True):
                 print(serializer.data)
-                ohe=pickle.load(open(r'C:\Users\USERTEST\Desktop\stage2\Fidness backend\fidness_backend\models\OHE.pickle', 'rb'))
+                ohe=pickle.load(open(r'C:\projects\dash\Fidness backend\fidness_backend\models\OHE.pickle', 'rb'))
 
             
                 df=pd.DataFrame(serializer.data,index=[0])
@@ -45,9 +45,9 @@ def churn_prediction(request):
 
 
 def pipeline(data):
-    ohe=pickle.load(open(r'C:\Users\USERTEST\Desktop\stage2\Fidness backend\fidness_backend\models\OHE.pickle', 'rb'))
-    scale=pickle.load(open(r'C:\Users\USERTEST\Desktop\stage2\Fidness backend\fidness_backend\models\scaling.pickle', 'rb'))
-    best_model=pickle.load(open(r'C:\Users\USERTEST\Desktop\stage2\Fidness backend\fidness_backend\models\best_model.pickle', 'rb'))
+    ohe=pickle.load(open(r'C:\projects\dash\fidness_backend\models\OHE.pickle', 'rb'))
+    scale=pickle.load(open(r'C:\projects\dashfidness_backend\models\scaling.pickle', 'rb'))
+    best_model=pickle.load(open(r'C:\projects\dash\fidness_backend\models\best_model.pickle', 'rb'))
 
 @api_view(['GET',"POST"])
 def prediction(request,pk):
@@ -105,7 +105,7 @@ def prediction(request,pk):
         cols = X.columns
         index = X.index
 
-        scaler=pickle.load(open(r'C:\Users\USERTEST\Desktop\stage2\Fidness backend\fidness_backend\models\scaling.pickle', 'rb'))
+        scaler=pickle.load(open(r'C:\projects\dash\fidness_backend\models\scaling.pickle', 'rb'))
         df_scaler=scaler.transform(X)
 
         X = pd.concat([X, cat_df], axis = 1)
@@ -117,7 +117,7 @@ def prediction(request,pk):
 
 
        
-        best_model=pickle.load(open(r'C:\Users\USERTEST\Desktop\stage2\Fidness backend\fidness_backend\models\best_model.pickle', 'rb'))
+        best_model=pickle.load(open(r'C:\projects\dash\fidness_backend\models\best_model.pickle', 'rb'))
 
 
         prediction=best_model.predict(X)
@@ -155,6 +155,11 @@ class SuperAdminViewSet(viewsets.ModelViewSet):
 class ClientViewSet(viewsets.ModelViewSet):
     serializer_class = ClientSerializer
     queryset = FidClient.objects.all()
+
+class PaysViewSet(viewsets.ModelViewSet):
+    serializer_class = PaysSerializer
+    queryset = FidGouvernorat.objects.all()
+
 
 
     

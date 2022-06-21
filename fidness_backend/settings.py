@@ -87,10 +87,11 @@ WSGI_APPLICATION = 'fidness_backend.wsgi.application'
 
 DATABASES = {
     'default':{   'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'fid_database2',
+        'NAME': 'fid_db',
         'HOST': 'localhost',
         'USER': 'root',
-        'PASSWORD': '1234'}
+        'PASSWORD': '',
+        'PORT':'3308'}
     # 'fidness_1': {
     #     'ENGINE': 'django.db.backends.mysql',
     #     'NAME': 'fid_database',
